@@ -1123,9 +1123,10 @@ void ebsynthRunCuda(int    numStyleChannels,
                     int*   stopThresholdPerLevel,
                     int    extraPass3x3,
                     void*  outputNnfData,
-                    void*  outputImageData)
+                    void*  outputImageData,
+                    void*  outputErrorData)
 {
-  void (*const dispatchEbsynth[EBSYNTH_MAX_GUIDE_CHANNELS][EBSYNTH_MAX_STYLE_CHANNELS])(int,int,int,int,void*,void*,int,int,void*,void*,float*,float*,float,int,int,int,int*,int*,int*,int,void*,void*) =
+  void (*const dispatchEbsynth[EBSYNTH_MAX_GUIDE_CHANNELS][EBSYNTH_MAX_STYLE_CHANNELS])(int,int,int,int,void*,void*,int,int,void*,void*,float*,float*,float,int,int,int,int*,int*,int*,int,void*,void*, void*) =
   {
     { ebsynthCuda<1, 1>, ebsynthCuda<2, 1>, ebsynthCuda<3, 1>, ebsynthCuda<4, 1>, ebsynthCuda<5, 1>, ebsynthCuda<6, 1>, ebsynthCuda<7, 1>, ebsynthCuda<8, 1> },
     { ebsynthCuda<1, 2>, ebsynthCuda<2, 2>, ebsynthCuda<3, 2>, ebsynthCuda<4, 2>, ebsynthCuda<5, 2>, ebsynthCuda<6, 2>, ebsynthCuda<7, 2>, ebsynthCuda<8, 2> },
@@ -1177,7 +1178,8 @@ void ebsynthRunCuda(int    numStyleChannels,
                                                             stopThresholdPerLevel,
                                                             extraPass3x3,
                                                             outputNnfData,
-                                                            outputImageData);
+                                                            outputImageData,
+                                                            outputErrorData);
   }
 }
 
